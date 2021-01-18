@@ -3,6 +3,7 @@ import Welcome from './Welcome'
 import Toolbar from '../components/Toolbar';
 import { useHistory } from "react-router-dom";
 import Personal from './Personal';
+import DateOfBirth from './DateOfBirth';
 
 const Container = () => {
     const history = useHistory()
@@ -23,8 +24,8 @@ const Container = () => {
             }
             case '/dob': {
                 return (                                    
-                    // <DateOfBirth />
-                    <div>DATE OF BIRTH</div>
+                    <DateOfBirth />
+                    // <div>DATE OF BIRTH</div>
                 )
             }
             case '/agreement': {
