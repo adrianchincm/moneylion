@@ -1,8 +1,9 @@
 import './App.css';
 import Container from './containers/Container';
-
+import { ThemeProvider } from '@material-ui/core/styles';
 import {  Switch } from 'react-router-dom';
 import { Route, Redirect } from 'react-router-dom'
+import { defaultTheme } from './styles/materialui'
 
 const App = props => {
   
@@ -18,12 +19,14 @@ const App = props => {
   );
 
   return (
-    <div class="bg-bgPrimary h-screen text-center">
-      {/* <Toolbar pathname={history.location.pathname}/>
-      <Container pathname={history.location.pathname}/> */}
-      {/* {console.log(history.location.pathname)} */}
-      {routes}
-    </div>
+    <ThemeProvider theme={defaultTheme}>
+      <div class="bg-bgPrimary h-screen text-center">
+        {/* <Toolbar pathname={history.location.pathname}/>
+        <Container pathname={history.location.pathname}/> */}
+        {/* {console.log(history.location.pathname)} */}
+        {routes}
+      </div>
+    </ThemeProvider>
   );
 }
 
