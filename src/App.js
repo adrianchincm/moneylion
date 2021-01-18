@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Container from './containers/Container';
 
-function App() {
+import {  Switch } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom'
+
+const App = props => {
+  
+
+  let routes = (
+    <Switch>     
+        <Route path = "/welcome" component={Container}></Route>
+        <Route path = "/personal" component={Container}></Route>
+        <Route path = "/dob" component={Container}></Route>
+        <Route path = "/agreement" component={Container}></Route>
+      <Redirect to="/welcome" />
+    </Switch>
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p class="text-black">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="bg-bgPrimary h-screen text-center">
+      {/* <Toolbar pathname={history.location.pathname}/>
+      <Container pathname={history.location.pathname}/> */}
+      {/* {console.log(history.location.pathname)} */}
+      {routes}
     </div>
   );
 }
