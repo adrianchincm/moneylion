@@ -6,13 +6,14 @@ import { useHistory } from "react-router-dom";
 import {connect} from 'react-redux';
 import * as actions from '../store/actions/index'
 
-const Agreement = ({user, setUserInfo, setLastStep, resetState}) => {
+const Agreement = ({user, resetState, setLastStep}) => {
     const history = useHistory()
     const [agreementOneChecked, setAgreementOneChecked] = useState(false)
     const [agreementTwoChecked, setAgreementTwoChecked] = useState(false)
     const [enableButton, setEnableButton] = useState(false)
 
     useEffect(() => {
+        setLastStep(3)
         validate()
     }, [agreementOneChecked, agreementTwoChecked])
 

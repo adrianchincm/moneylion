@@ -1,16 +1,25 @@
 import React from 'react'
 import logo from '../images/logo.png'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import {connect} from 'react-redux';
 
-const Toolbar = () => {
+const Toolbar = ({step}) => {
     return (
         <div class="text-center shadow-lg bg-bgPrimary">
             <img class="pt-4 mx-auto" src={logo} alt="moneylionLogo"/> 
             <div class="mt-4">
-                <LinearProgress variant="determinate" value={50} />
+                {console.log('STEP', step)}
+                {!step && <LinearProgress variant="determinate" value={0} />}
+                {step && <LinearProgress variant="determinate" value={step/3 * 100} />}                
             </div>
         </div>
     )
 }
 
-export default Toolbar
+const mapStateToProps = state => {
+    return { 
+        step: state.user.step,
+    };
+}
+
+export default connect(mapStateToProps, null)(Toolbar);
