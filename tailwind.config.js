@@ -10,6 +10,7 @@ module.exports = {
       red: '#FF0000',
       dividerGray: '#46545e',
       bgPrimaryLight: '#393f4a',
+      blue: '#BFEFFF'
     },
     extend: {
       width: {

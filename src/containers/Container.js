@@ -4,6 +4,7 @@ import Toolbar from '../components/Toolbar';
 import { useHistory } from "react-router-dom";
 import Personal from './Personal';
 import DateOfBirth from './DateOfBirth';
+import Agreement from './Agreement';
 
 const Container = () => {
     const history = useHistory()
@@ -30,8 +31,8 @@ const Container = () => {
             }
             case '/agreement': {
                 return (                                    
-                    // <Agreement />
-                    <div>AGREEMENT</div>
+                    <Agreement />
+                    // <div>AGREEMENT</div>
                 )
             }
             default: return
