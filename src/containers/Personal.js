@@ -13,7 +13,6 @@ const Personal = ({user, setUserInfo, setLastStep}) => {
     const [enableButton, setEnableButton] = useState(false)
 
     useEffect(() => {
-        console.log(user)        
         validate()
     }, [inputFirstName, inputLastName, inputEmail])
     
@@ -21,14 +20,12 @@ const Personal = ({user, setUserInfo, setLastStep}) => {
         setLastStep(1)
     }, [])
 
-    const validate = () => {
-        console.log("VALIDATE")     
+    const validate = () => {        
         const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if(inputEmail.match(mailformat) && inputFirstName.length > 0 && inputLastName.length > 0) {
             setEnableButton(true)
-        } else {
-            console.log("VALIDATE EMAIL", inputEmail.match(mailformat))
+        } else {            
             setEnableButton(false)
         }                
     }
@@ -46,17 +43,14 @@ const Personal = ({user, setUserInfo, setLastStep}) => {
     }
 
     const firstNameOnChanged = text => event => {
-        console.log("FIRSTNAME ")                  
         setFirstname(event.target.value)
     }
 
-    const lastNameOnChanged = text => event => {   
-        console.log("LASTNAME ")                           
+    const lastNameOnChanged = text => event => {
         setLastname(event.target.value)
     }
 
-    const emailNameOnChanged = text => event => {    
-        console.log("EMAIL ")
+    const emailNameOnChanged = text => event => {
         setEmail(event.target.value)
     }
 
@@ -91,8 +85,7 @@ const Personal = ({user, setUserInfo, setLastStep}) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user.user,
-        step: state.step,        
+        user: state.user.user
     };
 }
 

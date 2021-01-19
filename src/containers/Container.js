@@ -14,32 +14,27 @@ const Container = () => {
         switch(history.location.pathname) {            
             case '/welcome': {                
                 return (                    
-                    <Welcome />                   
-                    // <div class="text-white">WELCOME</div>
+                    <Welcome />                                       
                 ) 
             }            
             case '/personal': {
                 return (                
-                    <Personal />
-                    // <div>PERSONAL</div>
+                    <Personal />                    
                 )
             }
             case '/dob': {
                 return (                                    
-                    <DateOfBirth />
-                    // <div>DATE OF BIRTH</div>
+                    <DateOfBirth />                    
                 )
             }
             case '/agreement': {
                 return (                                    
-                    <Agreement />
-                    // <div>AGREEMENT</div>
+                    <Agreement />                    
                 )
             }
             case '/success': {
                 return (                                    
-                    <SignupSuccess />
-                    // <div>AGREEMENT</div>
+                    <SignupSuccess />                    
                 )
             }
             default: return

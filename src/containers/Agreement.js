@@ -103,14 +103,12 @@ const Agreement = ({user, resetState, setLastStep}) => {
 
 const mapStateToProps = state => {
     return {
-        user: state.user.user,
-        step: state.step,        
+        user: state.user.user        
     };
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        setUserInfo: (user) => dispatch(actions.saveUserInfo(user)),
+    return {        
         setLastStep: (step) => dispatch(actions.saveUserLastStep(step)),
         resetState: () => dispatch(actions.resetState()),
     }

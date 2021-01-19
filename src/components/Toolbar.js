@@ -7,8 +7,7 @@ const Toolbar = ({step}) => {
     return (
         <div class="text-center shadow-lg bg-bgPrimary">
             <img class="pt-4 mx-auto" src={logo} alt="moneylionLogo"/> 
-            <div class="mt-4">
-                {console.log('STEP', step)}
+            <div class="mt-4"> 
                 {!step && <LinearProgress variant="determinate" value={0} />}
                 {step && <LinearProgress variant="determinate" value={step/3 * 100} />}                
             </div>

@@ -12,8 +12,7 @@ const DateOfBirth = ({user, setUserInfo, setLastStep}) => {
     const onContinueClicked = () => {
         let updatedUser = user
         updatedUser.dob = value
-        setUserInfo(updatedUser)
-        console.log(value)
+        setUserInfo(updatedUser)        
 
         history.push('./agreement')
     }

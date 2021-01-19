@@ -10,7 +10,7 @@ const SignupSuccess = () => {
     }
 
     return (
-        <div class="mt-32 w-500px text-left mx-auto text-center">
+        <div class="mt-32 w-500px mx-auto text-center">
             <p class="text-7xl">You have signed up successfully!</p>
 
             <div class="mt-8">
