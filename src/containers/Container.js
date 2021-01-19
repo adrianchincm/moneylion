@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Personal from './Personal';
 import DateOfBirth from './DateOfBirth';
 import Agreement from './Agreement';
+import SignupSuccess from './SignupSuccess';
 
 const Container = () => {
     const history = useHistory()
@@ -32,6 +33,12 @@ const Container = () => {
             case '/agreement': {
                 return (                                    
                     <Agreement />
+                    // <div>AGREEMENT</div>
+                )
+            }
+            case '/success': {
+                return (                                    
+                    <SignupSuccess />
                     // <div>AGREEMENT</div>
                 )
             }

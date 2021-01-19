@@ -2,7 +2,11 @@ import * as actionTypes from '../actions/actionTypes';
 import {updateObject} from '../../shared/utility'
 
 const initialState = {
-   user: null,
+   user: {
+       firstName: '',
+       lastName: '',
+       email: '',       
+   },
    step: null   
 }
 
@@ -18,12 +22,18 @@ const saveUserLastStep = (state, action) => {
     });            
 }
 
+const resetState = (state, action) => {    
+    return updateObject(state, initialState);            
+}
+
 const reducer = (state = initialState, action) => {    
     switch (action.type) {
         case actionTypes.SAVE_USER_INFO: 
             return saveUserInfo(state, action);
         case actionTypes.SAVE_STEP: 
-            return saveUserLastStep(state, action);     
+            return saveUserLastStep(state, action);
+        case actionTypes.RESET_STATE: 
+            return resetState(state, action);
         default: 
             return state    
     }

@@ -2,42 +2,61 @@ import React, {useEffect, useState} from 'react'
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
 import Input from '@material-ui/core/Input';
+import {connect} from 'react-redux';
+import * as actions from '../store/actions/index'
 
-const Personal = (props) => {
+const Personal = ({user, setUserInfo, setLastStep}) => {
     const history = useHistory()
-    const [firstName, setFirstname] = useState('')
-    const [lastName, setLastname] = useState('')
-    const [email, setEmail] = useState('')
+    const [inputFirstName, setFirstname] = useState(user.firstName || '')
+    const [inputLastName, setLastname] = useState(user.lastName || '')
+    const [inputEmail, setEmail] = useState(user.email || '')
     const [enableButton, setEnableButton] = useState(false)
 
     useEffect(() => {
+        console.log(user)        
         validate()
-    }, [firstName, lastName, email])
+    }, [inputFirstName, inputLastName, inputEmail])
+    
+    useEffect(() => {
+        setLastStep(1)
+    }, [])
 
     const validate = () => {
         console.log("VALIDATE")     
-        const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const mailformat = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        if(email.match(mailformat) && firstName.length > 0 && lastName > 0) {
+        if(inputEmail.match(mailformat) && inputFirstName.length > 0 && inputLastName.length > 0) {
             setEnableButton(true)
         } else {
+            console.log("VALIDATE EMAIL", inputEmail.match(mailformat))
             setEnableButton(false)
         }                
     }
 
     const onContinueClicked = () => {
+        let user = {
+            firstName: inputFirstName,
+            lastName: inputLastName,
+            email: inputEmail
+        }
+
+        setUserInfo(user)
+        
         history.push('./dob')
     }
 
-    const firstNameOnChanged = text => event => {             
+    const firstNameOnChanged = text => event => {
+        console.log("FIRSTNAME ")                  
         setFirstname(event.target.value)
     }
 
-    const lastNameOnChanged = text => event => {            
+    const lastNameOnChanged = text => event => {   
+        console.log("LASTNAME ")                           
         setLastname(event.target.value)
     }
 
     const emailNameOnChanged = text => event => {    
+        console.log("EMAIL ")
         setEmail(event.target.value)
     }
 
@@ -47,13 +66,13 @@ const Personal = (props) => {
 
             <div class="flex flex-col text-left mt-4">                
                 <p class="mt-4">First name</p>
-                <Input onChange={firstNameOnChanged('inputText')} label="First Name"/>
+                <Input value={inputFirstName} onChange={firstNameOnChanged('inputText')} label="First Name"/>
 
                 <p class="mt-4">Last name</p>
-                <Input onChange={lastNameOnChanged('inputText')} label="Last Name"/>
+                <Input value={inputLastName} onChange={lastNameOnChanged('inputText')} label="Last Name"/>
 
                 <p class="mt-4">Email</p>
-                <Input onChange={emailNameOnChanged('inputText')} label="Email"/>                
+                <Input value={inputEmail} onChange={emailNameOnChanged('inputText')} label="Email"/>                
             </div>
             
 
@@ -70,4 +89,18 @@ const Personal = (props) => {
     )
 }
 
-export default Personal
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        step: state.step,        
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUserInfo: (user) => dispatch(actions.saveUserInfo(user)),
+        setLastStep: (step) => dispatch(actions.saveUserLastStep(step)),        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Personal);

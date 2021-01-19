@@ -1,8 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import axios from '../shared/axios'
+import { useHistory } from "react-router-dom";
+import {connect} from 'react-redux';
+import * as actions from '../store/actions/index'
 
-const Agreement = () => {
+const Agreement = ({user, setUserInfo, setLastStep, resetState}) => {
+    const history = useHistory()
     const [agreementOneChecked, setAgreementOneChecked] = useState(false)
     const [agreementTwoChecked, setAgreementTwoChecked] = useState(false)
     const [enableButton, setEnableButton] = useState(false)
@@ -28,7 +33,21 @@ const Agreement = () => {
     };
 
     const onAgreeAndCreateClicked = () => {
-        //call api
+        const userObj = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            agreement1: agreementOneChecked,
+            agreement2: agreementTwoChecked
+        } 
+
+        axios.post('user', userObj).then(response => {            
+            if (response.data.success) {
+                resetState()
+
+                history.push('./success')
+            }            
+        })
     }
 
     return (
@@ -81,4 +100,19 @@ const Agreement = () => {
     )
 }
 
-export default Agreement
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        step: state.step,        
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUserInfo: (user) => dispatch(actions.saveUserInfo(user)),
+        setLastStep: (step) => dispatch(actions.saveUserLastStep(step)),
+        resetState: () => dispatch(actions.resetState()),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Agreement);

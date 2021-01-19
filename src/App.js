@@ -14,16 +14,14 @@ const App = props => {
         <Route path = "/personal" component={Container}></Route>
         <Route path = "/dob" component={Container}></Route>
         <Route path = "/agreement" component={Container}></Route>
+        <Route path = "/success" component={Container}></Route>
       <Redirect to="/welcome" />
     </Switch>
   );
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <div class="bg-bgPrimary h-screen text-center">
-        {/* <Toolbar pathname={history.location.pathname}/>
-        <Container pathname={history.location.pathname}/> */}
-        {/* {console.log(history.location.pathname)} */}
+      <div class="bg-bgPrimary h-screen text-center">        
         {routes}
       </div>
     </ThemeProvider>

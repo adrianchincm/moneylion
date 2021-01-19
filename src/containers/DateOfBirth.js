@@ -1,15 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DatePicker from 'react-date-picker'
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
+import {connect} from 'react-redux';
+import * as actions from '../store/actions/index'
 
-const DateOfBirth = () => {
+const DateOfBirth = ({user, setUserInfo, setLastStep}) => {
     const history = useHistory()
-    const [value, onChange] = useState(new Date());
+    const [value, onChange] = useState(user.dob);
 
     const onContinueClicked = () => {
+        let updatedUser = user
+        updatedUser.dob = value
+        setUserInfo(updatedUser)
+        console.log(value)
+
         history.push('./agreement')
     }
+
+    useEffect(() => {
+        setLastStep(2)
+    }, [])
 
     return (
         <div class="mt-32 w-500px text-left mx-auto">
@@ -24,7 +35,7 @@ const DateOfBirth = () => {
             <p class="text-textgray mt-2">MM/DD/YYYY</p>
 
             <div class="mt-8">
-                <Button size="large" variant="contained" color="primary" onClick={() => onContinueClicked()}>
+                <Button size="large" disabled={!value} variant="contained" color="primary" onClick={() => onContinueClicked()}>
                     <p class="text-white">Continue</p>
                 </Button>
             </div>
@@ -32,4 +43,19 @@ const DateOfBirth = () => {
     )
 }
 
-export default DateOfBirth
+
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        step: state.step,        
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setUserInfo: (user) => dispatch(actions.saveUserInfo(user)),
+        setLastStep: (step) => dispatch(actions.saveUserLastStep(step)),        
+    }
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DateOfBirth);

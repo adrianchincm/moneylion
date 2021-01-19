@@ -14,3 +14,10 @@ export const saveUserLastStep = (step) => {
     };
 }
 
+export const resetState = () => {
+    return {
+        type: actionTypes.RESET_STATE        
+    };
+}
+
+
